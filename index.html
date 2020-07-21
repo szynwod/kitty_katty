@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <title>Kotki</title>
+        <script src="https://unpkg.com/vue"></script>
+        <link rel="stylesheet" type="text/css" href="assets/css/app.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <div class="row" id="app">
+            <center><img v-on:click="reloadPage" class="thumbnail" key="componentKey" v-bind:src="info" style="max-width: 40%;" /></center>
+        <script type="text/javascript">
+            new Vue({
+                el: "#app",
+                data() {
+                    return {
+                        info: null,
+                    };
+                },
+                mounted() {
+                    axios.get("https://api.thecatapi.com/v1/images/search").then((response) => (this.info = response.data[0].url));
+                },
+                methods: {
+                    reloadPage() {
+                        axios.get("https://api.thecatapi.com/v1/images/search").then((response) => (this.info = response.data[0].url));
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>
